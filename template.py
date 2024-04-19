@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 import time
-from FS.fpa import (
+from FS.aso import (
     jfs,
 )  # Importing the Flower Pollination Algorithm (FPA) from the FS library
 
@@ -76,16 +76,30 @@ with open(feature_name, "a") as file:
 
 # Read the feature file and extract the selected features
 feature_df = pd.read_csv(feature_name, sep=",", encoding="utf-8")
-selected_feature = feature_df.iat[0, 3]  # Read the selected features
-selected_feature = selected_feature[0:-1]  # Removes the last comma
 
-# Clean the selected features string and convert to a list
-selected_feature = selected_feature.strip('"')
-selected_feature = list(selected_feature.split(","))
+# Check if the feature DataFrame is empty or the selected features column is empty
+if not feature_df.empty and not pd.isnull(feature_df.iat[0, 3]):
+    # Read the selected features
+    selected_feature = feature_df.iat[0, 3]  # Read the selected features
 
-# Subset the training and testing data with the selected features
-X_train = X_train[selected_feature]
-X_test = X_test[selected_feature]
+    # Remove the last comma
+    selected_feature = selected_feature.rstrip(",")
 
-# Print the selected features for confirmation (optional)
-print("Selected features:", selected_feature)
+    # Clean the selected features string and convert to a list
+    selected_feature = selected_feature.strip('"')
+    selected_feature = list(selected_feature.split(","))
+
+    # Subset the training and testing data with the selected features
+    if selected_feature:
+        X_train = X_train[selected_feature]
+        X_test = X_test[selected_feature]
+        # Print the selected features for confirmation (optional)
+        print("Selected features:", selected_feature)
+    else:
+        print("No features were selected.")
+else:
+    # Handle case when feature file is empty or selected features column is empty
+    print("Feature file is empty or no selected features found.")
+    # Optionally, handle the case where no features are selected (e.g., use all features)
+    # X_train and X_test remain unchanged, or you can apply other handling strategies
+    # such as terminating the program or using alternative feature selection methods
