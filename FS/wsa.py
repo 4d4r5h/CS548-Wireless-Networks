@@ -119,7 +119,7 @@ def jfs(feat, label, opts):
 
     # Select features
     pos = np.arange(dim) + 1
-    sf = pos[Xgb > thres]
+    sf = pos[Xgb > thres] - 1
     sfeat = feat[:, sf - 1]
     # Store results
     WSA = {"sf": sf, "ff": sfeat, "nf": len(sf), "c": curve, "f": feat, "l": label}
