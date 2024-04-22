@@ -1,13 +1,11 @@
-# Make two changes - at line 8 and 14
+# Make two changes - at line 8 and 12
 
 # Import necessary libraries
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 import time
-from FS.aso import (  # Change here
-    jfs,
-)
+from FS.fpa import jfs  # Change here
 
 # Define the file names
 filename = "NF-BOT-IOT"
