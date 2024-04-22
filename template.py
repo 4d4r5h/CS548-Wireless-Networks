@@ -1,15 +1,17 @@
+# Make two changes - at line 8 and 14
+
 # Import necessary libraries
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 import time
-from FS.aso import (
+from FS.aso import (  # Change here
     jfs,
-)  # Importing the Flower Pollination Algorithm (FPA) from the FS library
+)
 
 # Define the file names
 filename = "NF-BOT-IOT"
-optimization = "FPA"
+optimization = "FPA"  # Change here
 train_filename = f"{filename}_train_preprocessed.csv"
 test_filename = f"{filename}_test_preprocessed.csv"
 
