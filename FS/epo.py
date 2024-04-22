@@ -62,8 +62,9 @@ def jfs(feat, label, opts):
             T0 = 0
         else:
             T0 = 1
-        # Temperature profile (7)
-        T = T0 - (max_iter / (t - max_iter))
+        # Avoid ZeroDivisionError by adding a small quantity to the denominator
+        denominator = t - max_iter if t != max_iter else 1e-10
+        T = T0 - (max_iter / denominator)
         for i in range(N):
             for d in range(dim):
                 # P_grid (10)
@@ -87,7 +88,7 @@ def jfs(feat, label, opts):
 
     # Select features
     pos = np.arange(dim)
-    sf = pos[Xgb > thres]
+    sf = pos[Xgb > thres] - 1  # Convert to 0-based indexing
     s_feat = feat[:, sf]
 
     # Store results
