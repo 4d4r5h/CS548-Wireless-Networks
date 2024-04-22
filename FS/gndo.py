@@ -129,6 +129,5 @@ def jfs(feat, label, opts):
     sFeat = feat[:, Sf]
     # Store results
     GNDO = {"sf": Sf, "ff": sFeat, "nf": len(Sf), "c": curve, "f": feat, "l": label}
-
-    print(GNDO)
+    
     return GNDO
